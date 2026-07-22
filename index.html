@@ -82,7 +82,33 @@
     html {
       scroll-behavior: smooth;
     }
+<script>
+  const revealElements = document.querySelectorAll(
+    "section, .card, .portfolio-box, .contact-box"
+  );
 
+  revealElements.forEach((element) => {
+    element.classList.add("reveal");
+  });
+
+  const observer = new IntersectionObserver(
+    (entries) => {
+      entries.forEach((entry) => {
+        if (entry.isIntersecting) {
+          entry.target.classList.add("active");
+          observer.unobserve(entry.target);
+        }
+      });
+    },
+    {
+      threshold: 0.15
+    }
+  );
+
+  revealElements.forEach((element) => {
+    observer.observe(element);
+  });
+</script>
     body {
       font-family: Arial, Helvetica, sans-serif;
       background:
