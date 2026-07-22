@@ -9,7 +9,57 @@
     name="description"
     content="Portfolio montażysty wideo. Shortsy, filmy gamingowe, vlogi i materiały rozrywkowe."
   />
+.reveal {
+  opacity: 0;
+  transform: translateY(35px);
+  transition:
+    opacity 0.8s ease,
+    transform 0.8s ease;
+}
 
+.reveal.active {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+.card {
+  position: relative;
+  overflow: hidden;
+}
+
+.card::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background: radial-gradient(
+    circle at top left,
+    rgba(139, 92, 246, 0.14),
+    transparent 45%
+  );
+  opacity: 0;
+  transition: opacity 0.35s ease;
+  pointer-events: none;
+}
+
+.card:hover::before {
+  opacity: 1;
+}
+
+.button-primary {
+  box-shadow: 0 0 0 rgba(139, 92, 246, 0);
+  animation: softPulse 3s ease-in-out infinite;
+}
+
+@keyframes softPulse {
+  0%,
+  100% {
+    box-shadow: 0 0 0 rgba(139, 92, 246, 0);
+  }
+
+  50% {
+    box-shadow: 0 0 28px rgba(139, 92, 246, 0.28);
+  }
+}
   <style>
     :root {
       --bg: #0b0b0f;
