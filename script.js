@@ -56,3 +56,36 @@ copyDiscord.addEventListener("click", async () => {
     toast.classList.remove("show");
   }, 2500);
 });
+
+
+// Mocniejsza animacja liter
+document.querySelectorAll(".split-text").forEach((element, lineIndex) => {
+  const text = element.dataset.text || element.textContent;
+  element.textContent = "";
+
+  [...text].forEach((character, index) => {
+    const span = document.createElement("span");
+    span.className = "char";
+    span.textContent = character === " " ? "\u00A0" : character;
+    span.style.animationDelay = `${0.18 + lineIndex * 0.32 + index * 0.045}s`;
+    element.appendChild(span);
+  });
+});
+
+// Subtelne, ale widoczne cząsteczki tła
+const particlesContainer = document.getElementById("particles");
+
+if (particlesContainer) {
+  const particleCount = window.innerWidth < 700 ? 16 : 30;
+
+  for (let i = 0; i < particleCount; i += 1) {
+    const particle = document.createElement("span");
+    particle.className = "particle";
+    particle.style.left = `${Math.random() * 100}%`;
+    particle.style.top = `${65 + Math.random() * 45}%`;
+    particle.style.animationDuration = `${7 + Math.random() * 9}s`;
+    particle.style.animationDelay = `${Math.random() * -12}s`;
+    particle.style.transform = `scale(${0.5 + Math.random()})`;
+    particlesContainer.appendChild(particle);
+  }
+}
