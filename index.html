@@ -1,118 +1,33 @@
 <!DOCTYPE html>
 <html lang="pl">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta charset="UTF-8">
 
-  <title>Michał | Video Editor</title>
+  <meta
+    name="viewport"
+    content="width=device-width, initial-scale=1.0"
+  >
+
   <meta
     name="description"
-    content="Portfolio montażysty wideo. Shortsy, filmy gamingowe, vlogi i materiały rozrywkowe."
-  />
-.reveal {
-  opacity: 0;
-  transform: translateY(35px);
-  transition:
-    opacity 0.8s ease,
-    transform 0.8s ease;
-}
+    content="Portfolio Michała — montaż krótkich form, filmów gamingowych i materiałów rozrywkowych."
+  >
 
-.reveal.active {
-  opacity: 1;
-  transform: translateY(0);
-}
+  <title>Michał | Video Editor</title>
 
-.card {
-  position: relative;
-  overflow: hidden;
-}
-
-.card::before {
-  content: "";
-  position: absolute;
-  inset: 0;
-  background: radial-gradient(
-    circle at top left,
-    rgba(139, 92, 246, 0.14),
-    transparent 45%
-  );
-  opacity: 0;
-  transition: opacity 0.35s ease;
-  pointer-events: none;
-}
-
-.card:hover::before {
-  opacity: 1;
-}
-
-.button-primary {
-  box-shadow: 0 0 0 rgba(139, 92, 246, 0);
-  animation: softPulse 3s ease-in-out infinite;
-}
-
-@keyframes softPulse {
-  0%,
-  100% {
-    box-shadow: 0 0 0 rgba(139, 92, 246, 0);
-  }
-
-  50% {
-    box-shadow: 0 0 28px rgba(139, 92, 246, 0.28);
-  }
-}/* ===== Płynne przewijanie ===== */
-html {
-    scroll-behavior: smooth;
-    scroll-padding-top: 90px;
-}
-
-/* ===== Animacja sekcji ===== */
-section {
-    opacity: 0;
-    transform: translateY(40px);
-    animation: sectionFade 0.8s ease forwards;
-}
-
-section:nth-of-type(1) { animation-delay: .1s; }
-section:nth-of-type(2) { animation-delay: .2s; }
-section:nth-of-type(3) { animation-delay: .3s; }
-section:nth-of-type(4) { animation-delay: .4s; }
-
-@keyframes sectionFade {
-    from {
-        opacity: 0;
-        transform: translateY(40px);
-    }
-
-    to {
-        opacity: 1;
-        transform: translateY(0);
-    }
-}
-
-/* ===== Efekt przy klikaniu przycisków ===== */
-.button {
-    transition: transform .25s ease, box-shadow .25s ease;
-}
-
-.button:hover {
-    transform: translateY(-3px);
-    box-shadow: 0 10px 25px rgba(139,92,246,.35);
-}
-
-.button:active {
-    transform: scale(.96);
-}
   <style>
     :root {
-      --bg: #0b0b0f;
-      --bg-soft: #12121a;
-      --card: #171722;
+      --background: #08080d;
+      --background-soft: #101018;
+      --card: rgba(255, 255, 255, 0.045);
+      --card-hover: rgba(255, 255, 255, 0.075);
       --text: #ffffff;
-      --muted: #b8b8c7;
-      --accent: #8b5cf6;
-      --accent-2: #a78bfa;
-      --border: #2a2a3a;
-      --max-width: 1100px;
+      --text-muted: #aaaaba;
+      --purple: #8b5cf6;
+      --purple-light: #b197fc;
+      --border: rgba(255, 255, 255, 0.1);
+      --shadow: 0 25px 70px rgba(0, 0, 0, 0.35);
+      --container: 1120px;
     }
 
     * {
@@ -123,41 +38,59 @@ section:nth-of-type(4) { animation-delay: .4s; }
 
     html {
       scroll-behavior: smooth;
+      scroll-padding-top: 100px;
     }
-<script>
-  const revealElements = document.querySelectorAll(
-    "section, .card, .portfolio-box, .contact-box"
-  );
 
-  revealElements.forEach((element) => {
-    element.classList.add("reveal");
-  });
-
-  const observer = new IntersectionObserver(
-    (entries) => {
-      entries.forEach((entry) => {
-        if (entry.isIntersecting) {
-          entry.target.classList.add("active");
-          observer.unobserve(entry.target);
-        }
-      });
-    },
-    {
-      threshold: 0.15
-    }
-  );
-
-  revealElements.forEach((element) => {
-    observer.observe(element);
-  });
-</script>
     body {
-      font-family: Arial, Helvetica, sans-serif;
+      min-height: 100vh;
+      overflow-x: hidden;
       background:
-        radial-gradient(circle at top right, rgba(139, 92, 246, 0.18), transparent 30%),
-        var(--bg);
+        radial-gradient(
+          circle at 85% 10%,
+          rgba(139, 92, 246, 0.17),
+          transparent 32%
+        ),
+        radial-gradient(
+          circle at 10% 55%,
+          rgba(98, 60, 180, 0.1),
+          transparent 28%
+        ),
+        var(--background);
       color: var(--text);
+      font-family:
+        Inter,
+        system-ui,
+        -apple-system,
+        BlinkMacSystemFont,
+        "Segoe UI",
+        sans-serif;
       line-height: 1.6;
+    }
+
+    body::before {
+      content: "";
+      position: fixed;
+      inset: 0;
+      z-index: -2;
+      pointer-events: none;
+      opacity: 0.2;
+      background-image:
+        linear-gradient(
+          rgba(255, 255, 255, 0.025) 1px,
+          transparent 1px
+        ),
+        linear-gradient(
+          90deg,
+          rgba(255, 255, 255, 0.025) 1px,
+          transparent 1px
+        );
+      background-size: 50px 50px;
+      mask-image:
+        linear-gradient(
+          to bottom,
+          black,
+          transparent 85%
+        );
     }
 
     a {
@@ -165,285 +98,909 @@ section:nth-of-type(4) { animation-delay: .4s; }
       text-decoration: none;
     }
 
+    button {
+      color: inherit;
+      font: inherit;
+    }
+
     .container {
-      width: min(92%, var(--max-width));
-      margin: 0 auto;
+      width: min(92%, var(--container));
+      margin-inline: auto;
     }
 
-    nav {
-      position: sticky;
+    /* MENU */
+
+    .navbar {
+      position: fixed;
       top: 0;
+      left: 0;
       z-index: 1000;
-      background: rgba(11, 11, 15, 0.88);
-      backdrop-filter: blur(12px);
-      border-bottom: 1px solid rgba(255, 255, 255, 0.06);
+      width: 100%;
+      border-bottom: 1px solid transparent;
+      transition:
+        background 0.3s ease,
+        border-color 0.3s ease,
+        box-shadow 0.3s ease;
     }
 
-    .nav-inner {
-      min-height: 72px;
+    .navbar.scrolled {
+      background: rgba(8, 8, 13, 0.78);
+      border-color: var(--border);
+      box-shadow: 0 10px 40px rgba(0, 0, 0, 0.2);
+      backdrop-filter: blur(18px);
+    }
+
+    .nav-content {
+      min-height: 78px;
       display: flex;
       align-items: center;
       justify-content: space-between;
-      gap: 20px;
+      gap: 30px;
     }
 
     .logo {
-      font-size: 20px;
+      display: flex;
+      align-items: center;
+      gap: 11px;
+      font-size: 17px;
       font-weight: 800;
-      letter-spacing: 0.5px;
+      letter-spacing: 0.4px;
+    }
+
+    .logo-mark {
+      width: 34px;
+      height: 34px;
+      display: grid;
+      place-items: center;
+      border: 1px solid rgba(177, 151, 252, 0.4);
+      border-radius: 10px;
+      background:
+        linear-gradient(
+          135deg,
+          rgba(139, 92, 246, 0.35),
+          rgba(139, 92, 246, 0.08)
+        );
+      color: var(--purple-light);
+      box-shadow: 0 0 30px rgba(139, 92, 246, 0.15);
     }
 
     .nav-links {
       display: flex;
-      gap: 24px;
-      font-size: 15px;
-      color: var(--muted);
+      align-items: center;
+      gap: 28px;
+      color: var(--text-muted);
+      font-size: 14px;
+      font-weight: 600;
+    }
+
+    .nav-links a {
+      position: relative;
+      transition: color 0.2s ease;
+    }
+
+    .nav-links a::after {
+      content: "";
+      position: absolute;
+      right: 0;
+      bottom: -7px;
+      left: 0;
+      height: 2px;
+      border-radius: 999px;
+      background: var(--purple);
+      transform: scaleX(0);
+      transition: transform 0.25s ease;
     }
 
     .nav-links a:hover {
       color: var(--text);
     }
 
+    .nav-links a:hover::after {
+      transform: scaleX(1);
+    }
+
+    .menu-button {
+      width: 44px;
+      height: 44px;
+      display: none;
+      place-items: center;
+      border: 1px solid var(--border);
+      border-radius: 12px;
+      background: var(--card);
+      cursor: pointer;
+    }
+
+    .menu-icon,
+    .menu-icon::before,
+    .menu-icon::after {
+      width: 20px;
+      height: 2px;
+      display: block;
+      position: relative;
+      border-radius: 999px;
+      background: white;
+      transition: 0.25s ease;
+    }
+
+    .menu-icon::before,
+    .menu-icon::after {
+      content: "";
+      position: absolute;
+      left: 0;
+    }
+
+    .menu-icon::before {
+      top: -6px;
+    }
+
+    .menu-icon::after {
+      top: 6px;
+    }
+
+    .menu-button.active .menu-icon {
+      background: transparent;
+    }
+
+    .menu-button.active .menu-icon::before {
+      top: 0;
+      transform: rotate(45deg);
+    }
+
+    .menu-button.active .menu-icon::after {
+      top: 0;
+      transform: rotate(-45deg);
+    }
+
+    /* HERO */
+
     .hero {
-      min-height: 82vh;
+      min-height: 100vh;
       display: flex;
       align-items: center;
-      padding: 80px 0;
+      padding: 140px 0 80px;
+      position: relative;
     }
 
     .hero-content {
-      max-width: 850px;
+      max-width: 930px;
     }
 
-    .badge {
-      display: inline-block;
+    .eyebrow {
+      width: fit-content;
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      margin-bottom: 25px;
       padding: 8px 14px;
-      border: 1px solid var(--border);
+      border: 1px solid rgba(177, 151, 252, 0.25);
       border-radius: 999px;
-      background: rgba(255, 255, 255, 0.03);
-      color: var(--accent-2);
-      font-size: 14px;
-      margin-bottom: 24px;
+      background: rgba(139, 92, 246, 0.08);
+      color: var(--purple-light);
+      font-size: 13px;
+      font-weight: 700;
+      letter-spacing: 0.4px;
+      animation: heroEnter 0.8s ease both;
     }
 
-    h1 {
-      font-size: clamp(48px, 9vw, 88px);
-      line-height: 1.02;
-      letter-spacing: -3px;
-      margin-bottom: 24px;
+    .eyebrow-dot {
+      width: 7px;
+      height: 7px;
+      border-radius: 50%;
+      background: var(--purple-light);
+      box-shadow: 0 0 15px var(--purple);
+      animation: pulseDot 2s ease-in-out infinite;
     }
 
-    .hero p {
-      max-width: 700px;
-      color: var(--muted);
-      font-size: clamp(18px, 2.5vw, 22px);
+    .hero h1 {
+      max-width: 950px;
+      font-size: clamp(54px, 10vw, 108px);
+      font-weight: 850;
+      line-height: 0.95;
+      letter-spacing: -5px;
+      animation: heroEnter 0.9s 0.08s ease both;
+    }
+
+    .gradient-text {
+      display: inline-block;
+      background:
+        linear-gradient(
+          110deg,
+          #ffffff 10%,
+          #c4b5fd 42%,
+          #8b5cf6 70%,
+          #ffffff 95%
+        );
+      background-size: 220% auto;
+      -webkit-background-clip: text;
+      background-clip: text;
+      color: transparent;
+      animation:
+        textShine 7s linear infinite,
+        softGlow 4s ease-in-out infinite;
+    }
+
+    .hero-description {
+      max-width: 720px;
+      margin-top: 30px;
+      color: var(--text-muted);
+      font-size: clamp(18px, 2.2vw, 22px);
+      animation: heroEnter 0.9s 0.16s ease both;
     }
 
     .hero-buttons {
       display: flex;
       flex-wrap: wrap;
       gap: 14px;
-      margin-top: 32px;
+      margin-top: 36px;
+      animation: heroEnter 0.9s 0.24s ease both;
     }
 
     .button {
+      min-height: 52px;
       display: inline-flex;
       align-items: center;
       justify-content: center;
-      min-height: 50px;
-      padding: 0 22px;
-      border-radius: 12px;
-      font-weight: 700;
-      transition: transform 0.2s ease, background 0.2s ease;
+      gap: 10px;
+      padding: 0 23px;
+      border: 1px solid transparent;
+      border-radius: 13px;
+      font-size: 15px;
+      font-weight: 750;
+      cursor: pointer;
+      transition:
+        transform 0.22s ease,
+        box-shadow 0.22s ease,
+        background 0.22s ease,
+        border-color 0.22s ease;
     }
 
     .button:hover {
-      transform: translateY(-2px);
+      transform: translateY(-3px);
+    }
+
+    .button:active {
+      transform: translateY(0) scale(0.97);
     }
 
     .button-primary {
-      background: var(--accent);
+      background:
+        linear-gradient(
+          135deg,
+          #9d6cff,
+          #7540df
+        );
       color: white;
+      box-shadow:
+        0 12px 35px rgba(139, 92, 246, 0.3);
     }
 
     .button-primary:hover {
-      background: #9d74f7;
+      box-shadow:
+        0 18px 48px rgba(139, 92, 246, 0.42);
     }
 
     .button-secondary {
-      border: 1px solid var(--border);
-      background: rgba(255, 255, 255, 0.03);
+      border-color: var(--border);
+      background: rgba(255, 255, 255, 0.04);
+      color: white;
+      backdrop-filter: blur(10px);
     }
+
+    .button-secondary:hover {
+      border-color: rgba(177, 151, 252, 0.45);
+      background: rgba(139, 92, 246, 0.08);
+    }
+
+    .scroll-indicator {
+      position: absolute;
+      bottom: 35px;
+      left: 50%;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 10px;
+      color: #707080;
+      font-size: 11px;
+      letter-spacing: 2px;
+      text-transform: uppercase;
+      transform: translateX(-50%);
+      animation: heroEnter 1s 0.4s ease both;
+    }
+
+    .mouse {
+      width: 24px;
+      height: 38px;
+      position: relative;
+      border: 1px solid rgba(255, 255, 255, 0.24);
+      border-radius: 999px;
+    }
+
+    .mouse::after {
+      content: "";
+      width: 3px;
+      height: 7px;
+      position: absolute;
+      top: 8px;
+      left: 50%;
+      border-radius: 999px;
+      background: var(--purple-light);
+      transform: translateX(-50%);
+      animation: scrollMouse 1.8s ease-in-out infinite;
+    }
+
+    /* SEKCJE */
 
     section {
-      padding: 90px 0;
+      padding: 105px 0;
     }
 
-    .section-heading {
-      margin-bottom: 34px;
+    .section-header {
+      max-width: 760px;
+      margin-bottom: 42px;
     }
 
-    .section-heading span {
-      color: var(--accent-2);
-      font-size: 14px;
-      font-weight: 700;
-      text-transform: uppercase;
+    .section-label {
+      display: inline-block;
+      margin-bottom: 12px;
+      color: var(--purple-light);
+      font-size: 13px;
+      font-weight: 800;
       letter-spacing: 1.5px;
+      text-transform: uppercase;
     }
 
-    h2 {
-      font-size: clamp(34px, 5vw, 50px);
-      line-height: 1.1;
-      margin-top: 10px;
-      letter-spacing: -1.5px;
+    .section-title {
+      font-size: clamp(36px, 5vw, 58px);
+      line-height: 1.07;
+      letter-spacing: -2px;
     }
 
-    .about-text {
-      max-width: 800px;
-      color: var(--muted);
+    .section-description {
+      max-width: 760px;
+      margin-top: 19px;
+      color: var(--text-muted);
       font-size: 18px;
     }
 
-    .cards {
+    .about-grid {
+      display: grid;
+      grid-template-columns: 1.25fr 0.75fr;
+      align-items: stretch;
+      gap: 22px;
+    }
+
+    .about-card,
+    .mini-card,
+    .service-card,
+    .portfolio-empty,
+    .contact-panel {
+      border: 1px solid var(--border);
+      background:
+        linear-gradient(
+          145deg,
+          rgba(255, 255, 255, 0.055),
+          rgba(255, 255, 255, 0.022)
+        );
+      box-shadow: var(--shadow);
+      backdrop-filter: blur(10px);
+    }
+
+    .about-card {
+      padding: 36px;
+      border-radius: 22px;
+    }
+
+    .about-card p {
+      color: var(--text-muted);
+      font-size: 18px;
+    }
+
+    .about-card strong {
+      color: white;
+    }
+
+    .mini-cards {
+      display: grid;
+      gap: 22px;
+    }
+
+    .mini-card {
+      min-height: 120px;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      padding: 25px;
+      border-radius: 20px;
+    }
+
+    .mini-card span {
+      color: var(--purple-light);
+      font-size: 29px;
+      font-weight: 850;
+    }
+
+    .mini-card p {
+      margin-top: 4px;
+      color: var(--text-muted);
+      font-size: 14px;
+    }
+
+    /* USŁUGI */
+
+    .services-grid {
       display: grid;
       grid-template-columns: repeat(3, 1fr);
-      gap: 20px;
+      gap: 21px;
     }
 
-    .card {
-      background: linear-gradient(180deg, rgba(255,255,255,0.04), rgba(255,255,255,0.02));
-      border: 1px solid var(--border);
-      border-radius: 18px;
-      padding: 28px;
-      transition: transform 0.2s ease, border-color 0.2s ease;
+    .service-card {
+      min-height: 290px;
+      position: relative;
+      overflow: hidden;
+      padding: 31px;
+      border-radius: 22px;
+      transition:
+        transform 0.3s ease,
+        border-color 0.3s ease,
+        background 0.3s ease;
     }
 
-    .card:hover {
-      transform: translateY(-5px);
-      border-color: rgba(139, 92, 246, 0.7);
+    .service-card::before {
+      content: "";
+      width: 180px;
+      height: 180px;
+      position: absolute;
+      top: -80px;
+      right: -80px;
+      border-radius: 50%;
+      background: rgba(139, 92, 246, 0.22);
+      filter: blur(35px);
+      opacity: 0;
+      transition: opacity 0.3s ease;
     }
 
-    .card-icon {
-      font-size: 32px;
-      margin-bottom: 18px;
+    .service-card:hover {
+      border-color: rgba(177, 151, 252, 0.4);
+      background: var(--card-hover);
+      transform: translateY(-8px);
     }
 
-    .card h3 {
-      font-size: 21px;
-      margin-bottom: 10px;
+    .service-card:hover::before {
+      opacity: 1;
     }
 
-    .card p {
-      color: var(--muted);
+    .service-icon {
+      width: 55px;
+      height: 55px;
+      display: grid;
+      place-items: center;
+      margin-bottom: 48px;
+      border: 1px solid rgba(177, 151, 252, 0.25);
+      border-radius: 15px;
+      background: rgba(139, 92, 246, 0.1);
+      font-size: 25px;
     }
 
-    .portfolio-box {
-      border: 1px dashed rgba(167, 139, 250, 0.5);
-      background: rgba(139, 92, 246, 0.06);
-      border-radius: 20px;
-      padding: 52px 30px;
+    .service-card h3 {
+      position: relative;
+      margin-bottom: 12px;
+      font-size: 22px;
+    }
+
+    .service-card p {
+      position: relative;
+      color: var(--text-muted);
+      font-size: 15px;
+    }
+
+    /* PORTFOLIO */
+
+    .portfolio-empty {
+      position: relative;
+      overflow: hidden;
+      padding: 70px 35px;
+      border-radius: 25px;
       text-align: center;
     }
 
-    .portfolio-box h3 {
-      font-size: 28px;
-      margin-bottom: 12px;
+    .portfolio-empty::before {
+      content: "";
+      width: 400px;
+      height: 400px;
+      position: absolute;
+      top: -280px;
+      left: 50%;
+      border-radius: 50%;
+      background: rgba(139, 92, 246, 0.25);
+      filter: blur(70px);
+      transform: translateX(-50%);
     }
 
-    .portfolio-box p {
-      color: var(--muted);
+    .portfolio-icon {
+      width: 74px;
+      height: 74px;
+      display: grid;
+      place-items: center;
+      position: relative;
+      margin: 0 auto 24px;
+      border: 1px solid rgba(177, 151, 252, 0.35);
+      border-radius: 22px;
+      background: rgba(139, 92, 246, 0.12);
+      font-size: 32px;
+      animation: floating 3s ease-in-out infinite;
+    }
+
+    .portfolio-empty h3 {
+      position: relative;
+      margin-bottom: 13px;
+      font-size: clamp(26px, 4vw, 36px);
+    }
+
+    .portfolio-empty p {
       max-width: 620px;
+      position: relative;
       margin: 0 auto;
+      color: var(--text-muted);
+      font-size: 17px;
     }
 
-    .contact-box {
-      background: var(--bg-soft);
-      border: 1px solid var(--border);
-      border-radius: 20px;
-      padding: 36px;
+    /* KONTAKT */
+
+    .contact-panel {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 28px;
+      padding: 42px;
+      border-radius: 25px;
+    }
+
+    .contact-text h3 {
+      margin-bottom: 15px;
+      font-size: clamp(28px, 4vw, 40px);
+      line-height: 1.12;
+      letter-spacing: -1px;
+    }
+
+    .contact-text p {
+      max-width: 520px;
+      color: var(--text-muted);
+      font-size: 17px;
     }
 
     .contact-list {
-      margin-top: 24px;
       display: grid;
       gap: 14px;
     }
 
     .contact-item {
+      width: 100%;
+      min-height: 75px;
       display: flex;
       align-items: center;
       justify-content: space-between;
       gap: 20px;
       padding: 16px 18px;
-      background: rgba(255,255,255,0.03);
       border: 1px solid var(--border);
+      border-radius: 16px;
+      background: rgba(255, 255, 255, 0.035);
+      transition:
+        border-color 0.25s ease,
+        background 0.25s ease,
+        transform 0.25s ease;
+    }
+
+    button.contact-item {
+      cursor: pointer;
+    }
+
+    .contact-item:hover {
+      border-color: rgba(177, 151, 252, 0.4);
+      background: rgba(139, 92, 246, 0.08);
+      transform: translateX(4px);
+    }
+
+    .contact-name {
+      display: flex;
+      align-items: center;
+      gap: 13px;
+    }
+
+    .contact-symbol {
+      width: 42px;
+      height: 42px;
+      display: grid;
+      place-items: center;
       border-radius: 12px;
+      background: rgba(139, 92, 246, 0.13);
     }
 
-    .contact-item strong {
-      color: var(--accent-2);
+    .contact-details {
+      text-align: left;
     }
 
-    .contact-item span {
-      color: var(--muted);
-      text-align: right;
-      word-break: break-word;
-    }
-
-    footer {
-      padding: 28px 0;
-      border-top: 1px solid rgba(255,255,255,0.06);
-      color: #7f7f90;
-      text-align: center;
+    .contact-details strong {
+      display: block;
       font-size: 14px;
     }
 
-    .fade-in {
-      animation: fadeIn 0.8s ease both;
+    .contact-details span {
+      color: var(--text-muted);
+      font-size: 13px;
     }
 
-    @keyframes fadeIn {
+    .contact-action {
+      color: var(--purple-light);
+      font-size: 13px;
+      font-weight: 750;
+    }
+
+    /* STOPKA */
+
+    footer {
+      padding: 32px 0;
+      border-top: 1px solid var(--border);
+      color: #777787;
+      text-align: center;
+      font-size: 13px;
+    }
+
+    /* POWIADOMIENIE */
+
+    .toast {
+      position: fixed;
+      right: 24px;
+      bottom: 24px;
+      z-index: 2000;
+      padding: 14px 18px;
+      border: 1px solid rgba(177, 151, 252, 0.35);
+      border-radius: 13px;
+      background: rgba(20, 20, 30, 0.94);
+      color: white;
+      box-shadow: var(--shadow);
+      font-size: 14px;
+      opacity: 0;
+      pointer-events: none;
+      transform: translateY(20px);
+      transition:
+        opacity 0.3s ease,
+        transform 0.3s ease;
+      backdrop-filter: blur(15px);
+    }
+
+    .toast.show {
+      opacity: 1;
+      transform: translateY(0);
+    }
+
+    /* ANIMACJE PRZEWIJANIA */
+
+    .reveal {
+      opacity: 0;
+      transform: translateY(35px);
+      transition:
+        opacity 0.8s ease,
+        transform 0.8s cubic-bezier(0.2, 0.8, 0.2, 1);
+    }
+
+    .reveal.visible {
+      opacity: 1;
+      transform: translateY(0);
+    }
+
+    .delay-1 {
+      transition-delay: 0.08s;
+    }
+
+    .delay-2 {
+      transition-delay: 0.16s;
+    }
+
+    .delay-3 {
+      transition-delay: 0.24s;
+    }
+
+    @keyframes heroEnter {
       from {
         opacity: 0;
-        transform: translateY(18px);
+        filter: blur(8px);
+        transform: translateY(25px);
       }
 
       to {
         opacity: 1;
+        filter: blur(0);
         transform: translateY(0);
       }
     }
 
-    @media (max-width: 800px) {
-      .cards {
-        grid-template-columns: 1fr;
-      }
-
-      .nav-links {
-        display: none;
-      }
-
-      h1 {
-        letter-spacing: -2px;
-      }
-
-      .hero {
-        min-height: 72vh;
+    @keyframes textShine {
+      to {
+        background-position: -220% center;
       }
     }
 
-    @media (max-width: 520px) {
+    @keyframes softGlow {
+      0%,
+      100% {
+        filter: drop-shadow(
+          0 0 0 rgba(139, 92, 246, 0)
+        );
+      }
+
+      50% {
+        filter: drop-shadow(
+          0 0 24px rgba(139, 92, 246, 0.22)
+        );
+      }
+    }
+
+    @keyframes pulseDot {
+      0%,
+      100% {
+        opacity: 0.65;
+        transform: scale(0.85);
+      }
+
+      50% {
+        opacity: 1;
+        transform: scale(1.15);
+      }
+    }
+
+    @keyframes scrollMouse {
+      0% {
+        opacity: 0;
+        transform: translate(-50%, 0);
+      }
+
+      30% {
+        opacity: 1;
+      }
+
+      100% {
+        opacity: 0;
+        transform: translate(-50%, 12px);
+      }
+    }
+
+    @keyframes floating {
+      0%,
+      100% {
+        transform: translateY(0);
+      }
+
+      50% {
+        transform: translateY(-8px);
+      }
+    }
+
+    /* TELEFONY */
+
+    @media (max-width: 850px) {
+      .menu-button {
+        display: grid;
+      }
+
+      .nav-links {
+        width: min(92%, 420px);
+        position: fixed;
+        top: 88px;
+        right: 4%;
+        display: flex;
+        flex-direction: column;
+        align-items: stretch;
+        gap: 0;
+        padding: 10px;
+        border: 1px solid var(--border);
+        border-radius: 18px;
+        background: rgba(14, 14, 22, 0.97);
+        box-shadow: var(--shadow);
+        opacity: 0;
+        pointer-events: none;
+        transform: translateY(-15px);
+        transition:
+          opacity 0.25s ease,
+          transform 0.25s ease;
+        backdrop-filter: blur(20px);
+      }
+
+      .nav-links.open {
+        opacity: 1;
+        pointer-events: auto;
+        transform: translateY(0);
+      }
+
+      .nav-links a {
+        padding: 14px 15px;
+        border-radius: 11px;
+      }
+
+      .nav-links a:hover {
+        background: rgba(139, 92, 246, 0.1);
+      }
+
+      .nav-links a::after {
+        display: none;
+      }
+
+      .about-grid,
+      .contact-panel {
+        grid-template-columns: 1fr;
+      }
+
+      .services-grid {
+        grid-template-columns: 1fr;
+      }
+
+      .service-card {
+        min-height: auto;
+      }
+
+      .service-icon {
+        margin-bottom: 35px;
+      }
+
+      .scroll-indicator {
+        display: none;
+      }
+    }
+
+    @media (max-width: 560px) {
+      .hero {
+        min-height: 92vh;
+        padding-top: 120px;
+      }
+
+      .hero h1 {
+        font-size: clamp(50px, 16vw, 78px);
+        letter-spacing: -3px;
+      }
+
       section {
-        padding: 70px 0;
+        padding: 80px 0;
+      }
+
+      .about-card,
+      .contact-panel {
+        padding: 27px;
+      }
+
+      .portfolio-empty {
+        padding: 55px 23px;
       }
 
       .contact-item {
         align-items: flex-start;
-        flex-direction: column;
       }
 
-      .contact-item span {
-        text-align: left;
+      .contact-action {
+        display: none;
+      }
+
+      .toast {
+        right: 15px;
+        bottom: 15px;
+        left: 15px;
+        text-align: center;
+      }
+    }
+
+    @media (prefers-reduced-motion: reduce) {
+      html {
+        scroll-behavior: auto;
+      }
+
+      *,
+      *::before,
+      *::after {
+        animation-duration: 0.01ms !important;
+        animation-iteration-count: 1 !important;
+        transition-duration: 0.01ms !important;
+      }
+
+      .reveal {
+        opacity: 1;
+        transform: none;
       }
     }
   </style>
@@ -451,150 +1008,372 @@ section:nth-of-type(4) { animation-delay: .4s; }
 
 <body>
 
-  <nav>
-    <div class="container nav-inner">
-      <a href="#" class="logo">MICHAŁ EDITS</a>
+  <nav class="navbar" id="navbar">
+    <div class="container nav-content">
 
-      <div class="nav-links">
+      <a href="#start" class="logo">
+        <span class="logo-mark">M</span>
+        <span>MICHAŁ EDITS</span>
+      </a>
+
+      <div class="nav-links" id="navLinks">
         <a href="#o-mnie">O mnie</a>
         <a href="#uslugi">Co montuję</a>
         <a href="#portfolio">Portfolio</a>
         <a href="#kontakt">Kontakt</a>
       </div>
+
+      <button
+        class="menu-button"
+        id="menuButton"
+        type="button"
+        aria-label="Otwórz menu"
+        aria-expanded="false"
+      >
+        <span class="menu-icon"></span>
+      </button>
+
     </div>
   </nav>
 
   <main>
 
-    <header class="hero">
+    <header class="hero" id="start">
       <div class="container">
-        <div class="hero-content fade-in">
-          <div class="badge">Montaż wideo</div>
+        <div class="hero-content">
 
-          <h1>Michał<br />Video Editor</h1>
+          <div class="eyebrow">
+            <span class="eyebrow-dot"></span>
+            Montaż wideo
+          </div>
 
-          <p>
-            Tworzę dynamiczne montaże, które przyciągają uwagę
-            i sprawiają, że film ogląda się z przyjemnością.
+          <h1>
+            Michał<br>
+            <span class="gradient-text">Video Editor</span>
+          </h1>
+
+          <p class="hero-description">
+            Tworzę dynamiczne montaże, które przyciągają uwagę,
+            utrzymują dobre tempo i sprawiają, że film ogląda się
+            z przyjemnością.
           </p>
 
           <div class="hero-buttons">
-            <a href="#portfolio" class="button button-primary">
+            <a
+              href="#portfolio"
+              class="button button-primary"
+            >
               Zobacz portfolio
+              <span>↓</span>
             </a>
 
-            <a href="#kontakt" class="button button-secondary">
+            <a
+              href="#kontakt"
+              class="button button-secondary"
+            >
               Napisz do mnie
             </a>
           </div>
+
         </div>
+      </div>
+
+      <div class="scroll-indicator">
+        <div class="mouse"></div>
+        Przewiń
       </div>
     </header>
 
     <section id="o-mnie">
       <div class="container">
-        <div class="section-heading">
-          <span>O mnie</span>
-          <h2>Dbam o tempo, styl i uwagę widza</h2>
+
+        <div class="section-header reveal">
+          <span class="section-label">O mnie</span>
+
+          <h2 class="section-title">
+            Montaż z wyczuciem tempa i stylu
+          </h2>
+
+          <p class="section-description">
+            Rozwijam swoje umiejętności i podchodzę do każdego materiału
+            indywidualnie, dbając o to, aby końcowy film był ciekawy,
+            czytelny i przyjemny w odbiorze.
+          </p>
         </div>
 
-        <p class="about-text">
-          Cześć! Nazywam się Michał i zajmuję się montażem wideo.
-          Specjalizuję się w krótkich formach, materiałach gamingowych
-          oraz filmach rozrywkowych. Obecnie rozwijam swoje portfolio
-          i stale doskonalę umiejętności, dbając o dynamiczny montaż,
-          odpowiednie tempo oraz estetyczny wygląd każdego filmu.
-        </p>
+        <div class="about-grid">
+
+          <div class="about-card reveal delay-1">
+            <p>
+              Cześć! Nazywam się <strong>Michał</strong> i zajmuję się
+              montażem wideo. Interesują mnie krótkie formy, materiały
+              gamingowe oraz filmy rozrywkowe. Stale doskonalę swoje
+              umiejętności, poznaję nowe techniki i szukam ciekawych
+              projektów, przy których mogę pokazać swoją kreatywność.
+            </p>
+          </div>
+
+          <div class="mini-cards">
+
+            <div class="mini-card reveal delay-2">
+              <span>100%</span>
+              <p>Zaangażowania w każdy projekt</p>
+            </div>
+
+            <div class="mini-card reveal delay-3">
+              <span>PL</span>
+              <p>Montaż materiałów po polsku</p>
+            </div>
+
+          </div>
+        </div>
+
       </div>
     </section>
 
     <section id="uslugi">
       <div class="container">
-        <div class="section-heading">
-          <span>Co montuję</span>
-          <h2>Materiały dopasowane do platformy i odbiorcy</h2>
+
+        <div class="section-header reveal">
+          <span class="section-label">Co montuję</span>
+
+          <h2 class="section-title">
+            Różne formaty, jeden cel: dobry film
+          </h2>
+
+          <p class="section-description">
+            Montaż dopasowuję do charakteru materiału, platformy
+            oraz odbiorców.
+          </p>
         </div>
 
-        <div class="cards">
-          <article class="card">
-            <div class="card-icon">🎬</div>
+        <div class="services-grid">
+
+          <article class="service-card reveal delay-1">
+            <div class="service-icon">🎬</div>
+
             <h3>Shortsy, TikToki i Reelsy</h3>
+
             <p>
-              Dynamiczne krótkie filmy z napisami, muzyką,
-              zbliżeniami i efektami.
+              Dynamiczne krótkie formy z napisami, efektami,
+              zbliżeniami, muzyką i odpowiednim tempem.
             </p>
           </article>
 
-          <article class="card">
-            <div class="card-icon">🎮</div>
+          <article class="service-card reveal delay-2">
+            <div class="service-icon">🎮</div>
+
             <h3>Filmy gamingowe</h3>
+
             <p>
-              Gameplaye, let's playe, zabawne momenty
-              oraz dłuższe materiały na YouTube.
+              Gameplaye, let's playe, zabawne momenty,
+              kompilacje oraz dłuższe filmy na YouTube.
             </p>
           </article>
 
-          <article class="card">
-            <div class="card-icon">🎥</div>
+          <article class="service-card reveal delay-3">
+            <div class="service-icon">🎥</div>
+
             <h3>Filmy rozrywkowe</h3>
+
             <p>
-              Vlogi, wyzwania, kompilacje i inne materiały
-              tworzone z myślą o rozrywce.
+              Vlogi, wyzwania i inne materiały tworzone
+              z myślą o rozrywce oraz utrzymaniu uwagi widza.
             </p>
           </article>
+
         </div>
       </div>
     </section>
 
     <section id="portfolio">
       <div class="container">
-        <div class="section-heading">
-          <span>Portfolio</span>
-          <h2>Moje realizacje</h2>
+
+        <div class="section-header reveal">
+          <span class="section-label">Portfolio</span>
+
+          <h2 class="section-title">
+            Moje realizacje
+          </h2>
+
+          <p class="section-description">
+            W tym miejscu pojawią się ukończone projekty
+            oraz przykłady mojego montażu.
+          </p>
         </div>
 
-        <div class="portfolio-box">
-          <h3>🚧 Pierwsze projekty już wkrótce</h3>
+        <div class="portfolio-empty reveal delay-1">
+
+          <div class="portfolio-icon">🎞️</div>
+
+          <h3>Pierwsze projekty już wkrótce</h3>
+
           <p>
-            Obecnie rozwijam swoje portfolio i pracuję nad pierwszymi
-            realizacjami. Gotowe filmy pojawią się tutaj niedługo.
+            Obecnie rozwijam portfolio i pracuję nad pierwszymi
+            realizacjami. Gotowe filmy zostaną dodane tutaj,
+            gdy tylko będą dostępne.
           </p>
+
         </div>
       </div>
     </section>
 
     <section id="kontakt">
       <div class="container">
-        <div class="section-heading">
-          <span>Kontakt</span>
-          <h2>Masz materiał do zmontowania?</h2>
+
+        <div class="section-header reveal">
+          <span class="section-label">Kontakt</span>
+
+          <h2 class="section-title">
+            Masz materiał do zmontowania?
+          </h2>
         </div>
 
-        <div class="contact-box">
-          <p class="about-text">
-            Napisz do mnie i opowiedz krótko, jaki film chcesz stworzyć.
-          </p>
+        <div class="contact-panel reveal delay-1">
+
+          <div class="contact-text">
+            <h3>Porozmawiajmy o Twoim filmie</h3>
+
+            <p>
+              Napisz do mnie i opowiedz krótko, jaki materiał
+              chcesz stworzyć. Możemy ustalić format, długość filmu
+              oraz styl montażu.
+            </p>
+          </div>
 
           <div class="contact-list">
-            <div class="contact-item">
-              <strong>Discord</strong>
-              <span>Mis1ek</span>
-            </div>
+
+            <button
+              class="contact-item"
+              id="copyDiscord"
+              type="button"
+            >
+              <span class="contact-name">
+
+                <span class="contact-symbol">💬</span>
+
+                <span class="contact-details">
+                  <strong>Discord</strong>
+                  <span>Mis1ek</span>
+                </span>
+
+              </span>
+
+              <span class="contact-action">
+                Kopiuj nazwę
+              </span>
+            </button>
 
             <div class="contact-item">
-              <strong>E-mail</strong>
-              <span>Dodam wkrótce</span>
+
+              <span class="contact-name">
+
+                <span class="contact-symbol">✉️</span>
+
+                <span class="contact-details">
+                  <strong>E-mail</strong>
+                  <span>Dodam wkrótce</span>
+                </span>
+
+              </span>
+
+              <span class="contact-action">
+                Wkrótce
+              </span>
+
             </div>
+
           </div>
         </div>
+
       </div>
     </section>
 
   </main>
 
   <footer>
-    © 2026 Michał | Video Editor
+    <div class="container">
+      © 2026 Michał | Video Editor
+    </div>
   </footer>
+
+  <div class="toast" id="toast">
+    Skopiowano nazwę Discord: Mis1ek
+  </div>
+
+  <script>
+    const navbar = document.getElementById("navbar");
+    const menuButton = document.getElementById("menuButton");
+    const navLinks = document.getElementById("navLinks");
+    const copyDiscord = document.getElementById("copyDiscord");
+    const toast = document.getElementById("toast");
+
+    window.addEventListener("scroll", () => {
+      if (window.scrollY > 20) {
+        navbar.classList.add("scrolled");
+      } else {
+        navbar.classList.remove("scrolled");
+      }
+    });
+
+    menuButton.addEventListener("click", () => {
+      const isOpen = navLinks.classList.toggle("open");
+
+      menuButton.classList.toggle("active", isOpen);
+      menuButton.setAttribute("aria-expanded", isOpen);
+    });
+
+    document.querySelectorAll(".nav-links a").forEach((link) => {
+      link.addEventListener("click", () => {
+        navLinks.classList.remove("open");
+        menuButton.classList.remove("active");
+        menuButton.setAttribute("aria-expanded", "false");
+      });
+    });
+
+    const revealObserver = new IntersectionObserver(
+      (entries, observer) => {
+        entries.forEach((entry) => {
+          if (entry.isIntersecting) {
+            entry.target.classList.add("visible");
+            observer.unobserve(entry.target);
+          }
+        });
+      },
+      {
+        threshold: 0.12
+      }
+    );
+
+    document.querySelectorAll(".reveal").forEach((element) => {
+      revealObserver.observe(element);
+    });
+
+    copyDiscord.addEventListener("click", async () => {
+      try {
+        await navigator.clipboard.writeText("Mis1ek");
+        showToast();
+      } catch (error) {
+        const textArea = document.createElement("textarea");
+
+        textArea.value = "Mis1ek";
+        document.body.appendChild(textArea);
+        textArea.select();
+        document.execCommand("copy");
+        textArea.remove();
+
+        showToast();
+      }
+    });
+
+    function showToast() {
+      toast.classList.add("show");
+
+      setTimeout(() => {
+        toast.classList.remove("show");
+      }, 2500);
+    }
+  </script>
 
 </body>
 </html>
